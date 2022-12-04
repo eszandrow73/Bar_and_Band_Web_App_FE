@@ -6,6 +6,9 @@ import {useState, useEffect} from 'react';
 import BarBandForm from './BarBandForm.js'
 import {Button, Modal, Input} from 'antd'
 import "antd/dist/antd.css";
+import LoginForm from "./components/loginform"
+
+var cors = require('cors')
 
 
 function App() {
@@ -177,9 +180,30 @@ function App() {
     })
  }
 
+ const ax_call = async()=>{
+  //https://resttesttest.com/
+  //this works
+  //var res = await Axios.get('https://httpbin.org/get')
+  //let's try this
+  //var res = await Axios.post('https://httpbin.org/post')
+  //id, spotify, website, "style", members
+  let r_list = []
+  r_list.push(3)
+  r_list.push('https://open.spotify.com/artist/2RbojkeHFCCbnmM4UAaWiN')
+  r_list.push('https://andreagillis.bandcamp.com/')
+  r_list.push('Alernative')
+  r_list.push('Andrea Gillis')
+  var res = await Axios.get('http://localhost:8999/addBand',{params: {'input':r_list}})
+    console.log(res)
+}
+
+
   return (
     <div className="App">
       <header className="App-header" style={{"text":"black"}}>
+        <div style={{"z-index":100}}>
+        <LoginForm />
+        </div>
         <img src={logo} className="App-logo" alt="logo" />
         <div>
           Bar <Input className="BarName" style={{"width":"300px", "height":"60px"}} />   Music Style <Input className="MusicStyle" style={{"width":"300px", "height":"60px"}} />
@@ -189,6 +213,8 @@ function App() {
         <BarBandForm isModalVisible={toggleView} inCancel={handleCancel} inData={getSelectedDayData()}/>
         <Button onClick={getBarData}>Bar Data</Button>
         <Button onClick={getBandData}>Band Data</Button>
+        <Button onClick={ax_call}>test</Button>
+        
       </header>
     </div>
   );
