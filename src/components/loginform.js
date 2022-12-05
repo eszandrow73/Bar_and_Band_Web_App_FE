@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
 import "./loginform.css"
 
-const LoginForm = () => {
+const LoginForm = (props) => {
     const [displayForm, setDisplayForm] = useState("loginImg")
     const [rejMes, setRejMes] = useState("")
     const [ct, setCt] = useState(0)
@@ -22,6 +22,7 @@ const LoginForm = () => {
 
         if (un=="Eric" && pw=="1234"){
             hideModal()
+            props.storeUser(un, pw)
         }
         else{
             var curCt = ct
