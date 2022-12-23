@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
+import axios from 'axios'
 import "./loginform.css"
 
 const LoginForm = (props) => {
@@ -16,13 +17,17 @@ const LoginForm = (props) => {
     //setIsModalVisible(false);
     //};
     //onOk={handleOk} onCancel={handleCancel}
-    const onFinish = (values) =>{
+    const onFinish = async(values) =>{
         const un = values.username
         const pw = values.password
 
-        if (un=="Eric" && pw=="1234"){
+        var res = await axios.get(`http://10.0.0.128:8999/checkUser/${un}`)
+        console.log(res)
+        let valid_pw = res.data[0].password
+
+        if (pw==valid_pw){
             hideModal()
-            props.storeUser(un, pw)
+            props.storeUser(un, pw, res.data[0].email)
         }
         else{
             var curCt = ct

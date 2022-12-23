@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect} from 'react'
 import BasicTable from "../components/BBTable"
 import axios from "axios"
-import {Button} from 'antd'
 
 export default function Dashboard() {
 
@@ -9,7 +8,7 @@ export default function Dashboard() {
     const [colData, setColData] = useState([])
 
     const loadData = async() => {
-        let res = await axios.get("http://10.0.0.128:8999/bandData")
+        let res = await axios.get("http://10.0.0.128:8999/artData")
         console.log(res)
         setBandData(res.data)
         let keys = Object.keys(res.data[0])
@@ -21,13 +20,6 @@ export default function Dashboard() {
             
     }
 
-    const memberInfo = async()=>{
-        let res = await axios.get("http://10.0.0.128:8999/band/1/member/1")
-        console.log(res.data)
-        let output = res.data[0]
-        alert(output.memberName)
-    }
-
     useEffect(() => {
         loadData()
     }, [])
@@ -36,10 +28,8 @@ export default function Dashboard() {
 
     return (
         <div>
-            <h2>Band Dashboard</h2>
+            <h2>Art Dashboard</h2>
             <BasicTable in_cols={ colData } in_data={bandData }/>
-            <br /><br /><br />
-            <Button onClick={memberInfo}>member info</Button>
         </div>
     );
 }

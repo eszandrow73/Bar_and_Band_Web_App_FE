@@ -6,7 +6,9 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
 export default function DeckTable(props){
     const columnDefs = props.in_cols
-    
+    if (columnDefs[0]!=undefined){
+        columnDefs[0].checkboxSelection = true
+    }
 
     const rowData =  props.in_data ;
 
@@ -35,12 +37,15 @@ export default function DeckTable(props){
         const selectedData = selectionNodes.map(node => node.data);
         console.log(selectedData)
 
-        var cardText = selectedData[0]["cardText"].split("/")
+        var firstObj = selectedData[0]
+        let keys = Object.keys(firstObj)
+        let output = ""
 
-        //alert(`Selected Node Data : ${selectedData[0]["cardText"]}`)
-        props.updateCard({urlExtend : cardText[0] })
-        //const selectedDataStringPresentation = selectedData.map(node =>  node.make + ' ' + node.model).join(', ');
-        //alert('Selected Nodes: ${selectedDataStringPresentation}');
+        keys.forEach((k)=>{
+            output = output + firstObj[k].toString() + ","
+        })
+
+        alert(output)
     }
     
     const [initalLoad, setInitialLoad] = useState(false)
