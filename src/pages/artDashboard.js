@@ -8,7 +8,7 @@ export default function Dashboard() {
     const [colData, setColData] = useState([])
 
     const loadData = async() => {
-        let res = await axios.get("http://10.0.0.128:8999/artData")
+        let res = await axios.get("http://localhost:8999/artData")
         console.log(res)
         setBandData(res.data)
         let keys = Object.keys(res.data[0])

@@ -21,7 +21,7 @@ const LoginForm = (props) => {
         const un = values.username
         const pw = values.password
 
-        var res = await axios.get(`http://10.0.0.128:8999/checkUser/${un}`)
+        var res = await axios.get(`http://localhost:8999/checkUser/${un}`)
         console.log(res)
         let valid_pw = res.data[0].password
 

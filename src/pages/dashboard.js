@@ -22,7 +22,7 @@ export default function Dashboard() {
     */
 
     const loadData = async() => {
-        let res = await axios.get("http://10.0.0.128:8999/bandData")
+        let res = await axios.get("http://localhost:8999/bandData")
         console.log(res)
         setBandData(res.data)
         let keys = Object.keys(res.data[0])
