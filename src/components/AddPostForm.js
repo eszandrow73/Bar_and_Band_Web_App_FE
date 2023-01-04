@@ -2,13 +2,20 @@ import React, {useState} from "react"
 import { Form, Input, Button, Modal, message } from 'antd';
 import axios from 'axios'
 
-const BandForm = (props) => {
+const { TextArea } = Input;
+
+const PostForm = (props) => {
     const [open, setOpen] = useState(false);
+    const [disForm, setDisForm] = useState(null)
     const [messageApi, contextHolder] = message.useMessage();
 
-    const changeOpen = () => {
+    const changeOpen = async() => {
         if(open==false){
-            setOpen(true)
+            axios.get('http://localhost:8999/i_test/' + props.in_page)
+            .then((res)=>{
+                setDisForm(res.data)
+                setOpen(true)
+          })
         }
         else{
             setOpen(false)
@@ -19,18 +26,20 @@ const BandForm = (props) => {
     const onFinish = (values) =>{
 
         let r_list = []
-        r_list.push(values.spotify)
-        r_list.push(values.website)
-        r_list.push(values.style)
-        r_list.push(values.members)
+        
+        //THIS NEEDS TO BE UPDATED TO THE USER's ID
+        r_list.push(1)
+
+        r_list.push(values.postText)
+        r_list.push(values.location)
 
         //console.log(r_list)
-        axios.get('http://localhost:8999/addBand',{params: {'input':r_list}})
+        axios.get('http://localhost:8999/addPost',{params: {'input':r_list}})
         .then((res)=>{
             console.log(res)
             messageApi.open({
                 type: 'success',
-                content: 'Band Data Added',
+                content: 'Post Data Added',
             });
             
         })
@@ -49,41 +58,30 @@ const BandForm = (props) => {
 
     return(
         <>
-        <Button onClick={changeOpen}>Add Band Form</Button>
+        <Button onClick={changeOpen}>Add Post</Button>
         <Modal visible={open} onOk={()=>console.log("OK pressed")} onCancel={changeOpen}>
         {contextHolder}
             <Form onFinish={onFinish}>
                 <h1 style={{textPosition: 'center'}}>Fill out Band Details Below</h1>
                 <Form.Item
-                    label="spotify"
-                    name="spotify"
+                    label="postText"
+                    name="postText"
                 >
-                    <Input placeholder="spotify link" />
+                    <TextArea placeholder="add post text here" style={{height:'300px'}} />
                 </Form.Item>
                 <Form.Item
-                    label="website"
-                    name="website"
+                    label="location"
+                    name="location"
                 >
-                    <Input placeholder="website" />
+                    <Input placeholder="location" />
                 </Form.Item>
-                <Form.Item
-                    label="style"
-                    name="style"
-                >
-                    <Input placeholder="style" />
-                </Form.Item>
-                <Form.Item
-                    label="members"
-                    name="members"
-                >
-                    <Input placeholder="members" />
-                </Form.Item>
-                <Button type="primary" htmlType="submit">Add Band</Button>
+                {disForm!=null?(<div dangerouslySetInnerHTML={{__html: disForm}} />):("")}
+                <Button type="primary" htmlType="submit">Add Post</Button>
             </Form>
         </Modal>
         </>
     )
 }
 
-export default BandForm
+export default PostForm
 

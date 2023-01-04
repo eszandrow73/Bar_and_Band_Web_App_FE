@@ -56,10 +56,10 @@ export default function Dashboard() {
     return (
         <div>
             <h2>Band Dashboard</h2>
-            <BasicTable in_cols={ colData } in_data={bandData }/>
-            <br />
             <AddBand />
             <br /><br />
+            <BasicTable in_cols={ colData } in_data={bandData }/>
+            <br />
             <Button onClick={ax_call}>test</Button><br />
             <Button onClick={memberInfo}>member info</Button>
         </div>

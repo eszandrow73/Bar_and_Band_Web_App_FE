@@ -42,7 +42,7 @@ export default function Account(props) {
             <br />
             <h2>Account Email : {props.curEmail}</h2>
             <EmailUserForm from="Eric" sentTo="Eric_old" />
-            <ImageUploader />
+            <ImageUploader in_page="Account Page"/>
         </div>
     );
 }

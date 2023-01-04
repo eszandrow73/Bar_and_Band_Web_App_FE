@@ -5,8 +5,16 @@ import Axios from 'axios';
 import React,{ useState, useEffect } from 'react';
 
 import BarBandForm from './BarBandForm.js'
-import {Button, Modal, Input} from 'antd'
+import {Button, Modal, Input, Layout, Menu, Breadcrumb} from 'antd'
+import {
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    UploadOutlined,
+    UserOutlined,
+    VideoCameraOutlined,
+  } from '@ant-design/icons';
 import "antd/dist/antd.css";
+
 import LoginForm from "./pages/loginform"
 import CalendarC from "./components/CalendarComponent"
 //import BaseTable from "./components/BBTable"
@@ -31,12 +39,13 @@ import ProfilePage from "./pages/profile"
 
 
 var cors = require('cors')
-
+const { Header, Sider, Content, Footer } = Layout;
 
 function App() {
 
     const [curUser, setCurUser] = useState("")
     const [curEmail, setCurEmail] = useState("")
+    const [collapsed, setCollapsed] = useState(false);
 
     const storeUser = (un, pw, email) => {
         setCurUser(un)
@@ -45,24 +54,59 @@ function App() {
 
    return (
         <div className="App">
-          <header className="App-header" style={{"text":"black"}}>
-               {/*<div style={{"zIndex":100}}>
-                      <LoginForm storeUser={ storeUser } />
-   </div>*/}
-                  <Router>
-                      <div>
-                          <ul>
-                              <li><Link to="/">Home</Link></li>
-                              <li><Link to="/profile">Profile</Link></li>
-                              <li><Link to="/postDashboard">Posts</Link></li>
-                              <li><Link to="/artDashboard">Art Dashboard</Link></li>
-                              <li><Link to="/barDashboard">Bar Dashboard</Link></li>
-                              <li><Link to="/bandDashboard">Band Dashboard</Link></li>
-                              <li><Link to="/about">About</Link></li>
-                              <li><Link to="/account">Account</Link></li>
+               
+            <div style={{"zIndex":100}}>
+                    <LoginForm storeUser={ storeUser } />
+            </div>
 
-                          </ul>
-                          <hr />
+                <Router>
+                    <Layout>
+                    <Header>
+                        <div className="logo" />
+                        <Menu theme="dark" mode="horizontal" />
+                        <VideoCameraOutlined/><Link to="/profile">Profile</Link>
+                        <UserOutlined/><Link to="/about">About</Link>
+                        <UserOutlined/><Link to="/account">Account</Link>
+                    </Header>
+
+                    {/*
+                    <Breadcrumb style={{ margin: '16px 0' }}>
+                        <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>List</Breadcrumb.Item>
+                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                    </Breadcrumb>
+                    */}
+
+                    <Layout>
+
+                    <Sider trigger={null} collapsible collapsed={collapsed}>
+                        <div className="logo" />
+                        {/*
+                        <Menu
+                        theme="dark"
+                        mode="inline"
+                        defaultSelectedKeys={['1']}
+                        items={[
+                            {
+                            key: '1',
+                            icon: <><UserOutlined><Link to="/">Home</Link></UserOutlined></>,
+                            label: 'Home',
+                            },
+                        ]}
+                        />
+                    */}
+                        <UserOutlined/><Link to="/">Home</Link><br />
+                        <UploadOutlined/><Link to="/postDashboard">Posts</Link><br />
+                        <UploadOutlined/><Link to="/artDashboard">Art Dashboard</Link><br />
+                        <UploadOutlined/><Link to="/barDashboard">Bar Dashboard</Link><br />
+                        <UploadOutlined/><Link to="/bandDashboard">Band Dashboard</Link><br />
+                        
+
+                    </Sider>
+                    
+                          <Content style={{
+                            textAlign: 'center',
+                            }}>
                           <Routes>
                               <Route exact path="/" element={<Home />} />
                               <Route path="/profile" element={< ProfilePage curUser={curUser} />} />
@@ -73,15 +117,23 @@ function App() {
                               <Route path="/bandDashboard" element={<BandDashboard />} />
                               <Route path="/account" element={<Account curUser={curUser} curEmail={curEmail }/>} />
                           </Routes>
-
-                      </div>
+                          </Content>
+                        </Layout>
+                        <Footer
+                            style={{
+                            textAlign: 'center',
+                            }}
+                        >
+                            Designed ©2023 Created by Eric Zandrow
+                        </Footer>
+                      </Layout>
                   </Router>
-
+                  
+            {/*
             <div className="App-sidebar" style={{ "left": "5%", "top": "10%", "width": "25%", "height": "20%", "position": "absolute" }}>
                       <CalendarC />
-            </div>
+            </div>*/}
 
-           </header>
         </div>
    );
 }

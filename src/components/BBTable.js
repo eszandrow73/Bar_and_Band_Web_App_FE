@@ -67,7 +67,9 @@ export default function DeckTable(props){
             className="ag-theme-balham" 
             style={{
                 width:800,
-                height:800
+                height:800,
+                marginLeft: 'auto',
+                marginRight: 'auto'
             }}
         >
             {props.in_data[0]!=undefined?(
@@ -75,6 +77,10 @@ export default function DeckTable(props){
                     columnDefs={columnDefs}
                     rowData={rowData}
                     onGridReady={params => setGridApi(params.api)}
+                    style={{
+                        marginLeft: 'auto',
+                        marginRight: 'auto'
+                    }}
                 />):("")
             }
             <button onClick={onButtonClick}>View Selected Card</button>
