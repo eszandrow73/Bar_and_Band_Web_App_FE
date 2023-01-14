@@ -19,7 +19,6 @@ export default function ImageUploader(props){
             setShow(false)
         }
     };
-
     function loadImage(event){
         console.log(event)
         console.log(event.target.files[0]);
@@ -30,10 +29,11 @@ export default function ImageUploader(props){
     }
 
     return(<><br /><br />
-    <Button onClick={changeShow}>Upload Image</Button>
+    <Button onClick={changeShow}>Change Image</Button>
     <Modal visible={show} onOk={()=>console.log("OK pressed")} onCancel={changeShow}>
         <></>
         {disForm!=null?(<div dangerouslySetInnerHTML={{__html: disForm}} />):("")}
     </Modal>
     </>);
 }
+

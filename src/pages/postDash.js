@@ -46,7 +46,7 @@ export default function PostPage() {
     return (
         <div>
             <h2>PostPage</h2>
-            <AddPost />
+            <AddPost in_page='MainPost' />
             <br /><br />
             <BasicTable in_cols={ colData } in_data={postData }/>
             <Button onClick={getData}>Post Data</Button> <br />

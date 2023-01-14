@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Button, Card, Input, Form, Typography} from 'antd'
 import { CheckOutlined, HighlightOutlined, SmileFilled, SmileOutlined } from '@ant-design/icons';
+import ImageUploader from '../components/ImageUploader';
 const { Title, Paragraph, Text, Link } = Typography
 
 export default function Profile(props) {
@@ -62,6 +63,7 @@ export default function Profile(props) {
                 }}
             >{profileText}</Paragraph>
             </Card>
+            <ImageUploader in_page="Profile" />
         </div>
     );
 }
