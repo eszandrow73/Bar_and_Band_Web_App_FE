@@ -7,11 +7,17 @@ import React,{ useState, useEffect } from 'react';
 import BarBandForm from './BarBandForm.js'
 import {Button, Modal, Input, Layout, Menu, Breadcrumb} from 'antd'
 import {
+    BarsOutlined,
+    CaretRightOutlined,
+    DatabaseOutlined,
+    HomeOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    ProfileOutlined,
+    PictureOutlined,
     UploadOutlined,
     UserOutlined,
-    VideoCameraOutlined,
+    ToolOutlined,
   } from '@ant-design/icons';
 import "antd/dist/antd.css";
 
@@ -44,29 +50,39 @@ const { Header, Sider, Content, Footer } = Layout;
 function App() {
 
     const [curUser, setCurUser] = useState("")
+    const [curUserId, setCurUserId] = useState(0)
     const [curEmail, setCurEmail] = useState("")
     const [collapsed, setCollapsed] = useState(false);
 
-    const storeUser = (un, pw, email) => {
+    const storeUser = (un, id, email) => {
         setCurUser(un)
+        setCurUserId(id)
         setCurEmail(email)
+    }
+
+    if(curUser==""){
+        return (
+            <LoginForm storeUser={ storeUser } />
+        )
     }
 
    return (
         <div className="App">
                
+            {/*
             <div style={{"zIndex":100}}>
                     <LoginForm storeUser={ storeUser } />
             </div>
+            */}
 
                 <Router>
                     <Layout>
                     <Header>
                         <div className="logo" />
                         <Menu theme="dark" mode="horizontal" />
-                        <VideoCameraOutlined/><Link to="/profile">Profile</Link>
-                        <UserOutlined/><Link to="/about">About</Link>
-                        <UserOutlined/><Link to="/account">Account</Link>
+                        <Link to="/profile"><UserOutlined/>Profile</Link>
+                        <Link to="/about"><ProfileOutlined />About</Link>
+                        <Link to="/account"><ToolOutlined />Account</Link>
                     </Header>
 
                     {/*
@@ -95,11 +111,11 @@ function App() {
                         ]}
                         />
                     */}
-                        <UserOutlined/><Link to="/">Home</Link><br />
-                        <UploadOutlined/><Link to="/postDashboard">Posts</Link><br />
-                        <UploadOutlined/><Link to="/artDashboard">Art Dashboard</Link><br />
-                        <UploadOutlined/><Link to="/barDashboard">Bar Dashboard</Link><br />
-                        <UploadOutlined/><Link to="/bandDashboard">Band Dashboard</Link><br />
+                        <Link to="/"><HomeOutlined />Home</Link><br />
+                        <Link to="/postDashboard"><MenuFoldOutlined />Posts</Link><br />
+                        <Link to="/artDashboard"><PictureOutlined />Art Dashboard</Link><br />
+                        <Link to="/barDashboard"><BarsOutlined />Bar Dashboard</Link><br />
+                        <Link to="/bandDashboard"><CaretRightOutlined />Band Dashboard</Link><br />
                         
 
                     </Sider>
@@ -110,11 +126,11 @@ function App() {
                           <Routes>
                               <Route exact path="/" element={<Home />} />
                               <Route path="/profile" element={< ProfilePage curUser={curUser} />} />
-                              <Route path="/postDashboard" element={<PostDash />} />
+                              <Route path="/postDashboard" element={<PostDash curUserId={curUserId}/>} />
                               <Route path="/about" element={<About />} />
-                              <Route path="/artDashboard" element={<ArtDashBoad />} />
-                              <Route path="/barDashboard" element={<BarDashboard />} />
-                              <Route path="/bandDashboard" element={<BandDashboard />} />
+                              <Route path="/artDashboard" element={<ArtDashBoad curUserId={curUserId} />} />
+                              <Route path="/barDashboard" element={<BarDashboard curUserId={curUserId} />} />
+                              <Route path="/bandDashboard" element={<BandDashboard curUserId={curUserId} />} />
                               <Route path="/account" element={<Account curUser={curUser} curEmail={curEmail }/>} />
                           </Routes>
                           </Content>

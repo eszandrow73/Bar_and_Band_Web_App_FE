@@ -2,7 +2,7 @@
 import BasicTable from "../components/BBTable"
 import axios from "axios"
 
-export default function Dashboard() {
+export default function Dashboard(props) {
 
     const [bandData, setBandData] = useState([])
     const [colData, setColData] = useState([])
@@ -43,7 +43,7 @@ export default function Dashboard() {
     return (
         <div>
             <h2>Dashboard</h2>
-            <BasicTable in_col={ colData } in_data={bandData }/>
+            <BasicTable in_col={ colData } in_data={bandData } curUserId={props.curUserId} />
         </div>
     );
 }

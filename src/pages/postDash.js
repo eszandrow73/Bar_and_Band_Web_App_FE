@@ -4,7 +4,7 @@ import BasicTable from "../components/BBTable"
 import AddPost from "../components/AddPostForm"
 import {Button} from 'antd'
 
-export default function PostPage() {
+export default function PostPage(props) {
 
     const [urlList, setUrlList] = useState([])
     const [postData, setPostData] = useState([])
@@ -46,10 +46,10 @@ export default function PostPage() {
     return (
         <div>
             <h2>PostPage</h2>
-            <AddPost in_page='MainPost' />
+            <AddPost in_page='MainPost' /><Button onClick={getData}>View Images</Button>
             <br /><br />
-            <BasicTable in_cols={ colData } in_data={postData }/>
-            <Button onClick={getData}>Post Data</Button> <br />
+            <BasicTable in_cols={ colData } in_data={postData } curUserId={props.curUserId}/>
+            <br /><br />
             {urlList.map((u)=>(<>
                 <img alt="no image" style={{'width':'500px','height':'500px' }} src={u} /><br />
             </>))}

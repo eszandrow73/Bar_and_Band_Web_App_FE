@@ -3,12 +3,21 @@ import React, {useState, useEffect} from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import {Button} from 'antd'
+
+import DisplayRec from "./RecordDisplayForm"
 
 export default function DeckTable(props){
     const columnDefs = props.in_cols
     if (columnDefs[0]!=undefined){
         columnDefs[0].checkboxSelection = true
     }
+
+    columnDefs.forEach((c)=>{
+        if(c.field.includes("id")||c.field.includes("Id")){
+            c.hide = true
+        }
+    })
 
     const rowData =  props.in_data ;
 
@@ -30,24 +39,35 @@ export default function DeckTable(props){
     */
         
     const [gridApi, setGridApi] = useState(null)
-    
+
+    const [viewRec, setViewRec] = useState(false)
+    const [recData, setRecData] = useState({})
+    const [recKeys, setRecKeys] = useState([])
     
     const onButtonClick = () => {
         const selectionNodes = gridApi.getSelectedNodes();
         const selectedData = selectionNodes.map(node => node.data);
         console.log(selectedData)
 
+        setViewRec(true)
+
         var firstObj = selectedData[0]
+        setRecData(firstObj)
         let keys = Object.keys(firstObj)
+        setRecKeys(keys)
         let output = ""
 
         keys.forEach((k)=>{
             output = output + firstObj[k].toString() + ","
         })
 
-        alert(output)
+        //alert(output)
     }
     
+    const closeForm = () =>{
+        setViewRec(false)
+    }
+
     const [initalLoad, setInitialLoad] = useState(false)
     
     useEffect(() => {
@@ -72,19 +92,15 @@ export default function DeckTable(props){
                 marginRight: 'auto'
             }}
         >
-            {props.in_data[0]!=undefined?(
+            {props.in_data[0]!=undefined?(<>
+                <Button type="primary" onClick={onButtonClick}>View Selected Record</Button>
                 <AgGridReact
                     columnDefs={columnDefs}
                     rowData={rowData}
                     onGridReady={params => setGridApi(params.api)}
-                    style={{
-                        marginLeft: 'auto',
-                        marginRight: 'auto'
-                    }}
-                />):("")
+                /></>):("")
             }
-            <button onClick={onButtonClick}>View Selected Card</button>
-            
+            <DisplayRec isOpen={viewRec} data={recData} keys={recKeys} close={closeForm} curUserId={props.curUserId}/>
         </div>
     )
     

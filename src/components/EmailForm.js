@@ -12,7 +12,7 @@ const EmailForm = (props) => {
     const changeOpen = async() => {
         if(open==false){
             let res1 = await axios.get(`http://localhost:8999/checkUser/${props.from}`)
-            let res2 = await axios.get(`http://localhost:8999/checkUser/${props.sentTo}`)
+            let res2 = await axios.get(`http://localhost:8999/checkUser/${props.from}`)//sentTo}`)
 
             let from_email = res1.data[0].email
             setFrom(from_email)
@@ -42,8 +42,8 @@ const EmailForm = (props) => {
         email_list.push(values.email_text)
 
         //console.log(r_list)
-        //axios.get('http://localhost:8999/sendEmailReal', {params:{input: email_list}})
-        axios.get('http://localhost:8999/sendEmail', {params:{input: email_list}})
+        axios.get('http://localhost:8999/sendEmailReal', {params:{input: email_list}})
+        //axios.get('http://localhost:8999/sendEmail', {params:{input: email_list}})
         .then((res)=>{
             console.log(res)
             messageApi.open({

@@ -4,7 +4,7 @@ import AddBand from "../components/AddBandForm"
 import axios from "axios"
 import {Button} from 'antd'
 
-export default function Dashboard() {
+export default function Dashboard(props) {
 
     const [bandData, setBandData] = useState([])
     const [colData, setColData] = useState([])
@@ -58,7 +58,7 @@ export default function Dashboard() {
             <h2>Band Dashboard</h2>
             <AddBand />
             <br /><br />
-            <BasicTable in_cols={ colData } in_data={bandData }/>
+            <BasicTable in_cols={ colData } in_data={bandData } curUserId={props.curUserId} />
             <br />
             <Button onClick={ax_call}>test</Button><br />
             <Button onClick={memberInfo}>member info</Button>
