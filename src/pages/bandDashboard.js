@@ -3,6 +3,7 @@ import BasicTable from "../components/BBTable"
 import AddBand from "../components/AddBandForm"
 import axios from "axios"
 import {Button} from 'antd'
+import CT from "../components/CellTest"
 
 export default function Dashboard(props) {
 
@@ -15,8 +16,15 @@ export default function Dashboard(props) {
         setBandData(res.data)
         let keys = Object.keys(res.data[0])
         var colDef = []
+        var first = true
         keys.forEach((k) => {
-            colDef.push({headerName:k, field:k})
+            if (first=true){
+                colDef.push({headerName:k, field:k, cellRenderer: CT})
+            }
+            else{
+                colDef.push({headerName:k, field:k})
+            }
+            first = false
         })
         setColData(colDef)
             

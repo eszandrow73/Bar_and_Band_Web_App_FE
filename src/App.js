@@ -55,10 +55,29 @@ function App() {
     const [collapsed, setCollapsed] = useState(false);
 
     const storeUser = (un, id, email) => {
+        localStorage.setItem("cur_user", un)
+        localStorage.setItem("cur_email", email)
+        //localStorage.setItem("cur_user_id", id)
+        
         setCurUser(un)
         setCurUserId(id)
         setCurEmail(email)
     }
+
+    const checkIfLoggedIn = () =>{
+        let cu = localStorage.getItem("cur_user")
+        //let id = localStorage.getItem("cur_user_id")
+        //let email = localStorage.getItem("cur_email")
+
+        if (cu != undefined){
+            setCurUser(cu)
+        }
+
+    }
+
+    useEffect(()=>{
+        checkIfLoggedIn()
+    },[curUser])
 
     if(curUser==""){
         return (
