@@ -18,6 +18,9 @@ import {
     UploadOutlined,
     UserOutlined,
     ToolOutlined,
+    KeyOutlined,
+    MonitorOutlined,
+    MessageOutlined
   } from '@ant-design/icons';
 import "antd/dist/antd.css";
 
@@ -42,6 +45,7 @@ import BandDashboard from "./pages/bandDashboard"
 import PostDash from "./pages/postDash"
 import Account from "./pages/account"
 import ProfilePage from "./pages/profile"
+import ChatPage from "./pages/chatGPT"
 
 
 var cors = require('cors')
@@ -102,6 +106,7 @@ function App() {
                         <Link to="/profile"><UserOutlined/>Profile</Link>
                         <Link to="/about"><ProfileOutlined />About</Link>
                         <Link to="/account"><ToolOutlined />Account</Link>
+                        <Link to="/chat"><KeyOutlined />ChatGPT</Link>
                     </Header>
 
                     {/*
@@ -151,6 +156,7 @@ function App() {
                               <Route path="/barDashboard" element={<BarDashboard curUserId={curUserId} />} />
                               <Route path="/bandDashboard" element={<BandDashboard curUserId={curUserId} />} />
                               <Route path="/account" element={<Account curUser={curUser} curEmail={curEmail }/>} />
+                              <Route path="/chat" element={<ChatPage />} />
                           </Routes>
                           </Content>
                         </Layout>

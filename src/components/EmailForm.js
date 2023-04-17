@@ -18,7 +18,7 @@ const EmailForm = (props) => {
             setFrom(from_email)
 
             let to_email = res2.data[0].email
-            setSendTo(to_email)
+            setSendTo("brendan.e.downes@gmail.com")//to_email)
             setOpen(true)
         }
         else{
