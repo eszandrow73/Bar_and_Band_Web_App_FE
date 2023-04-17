@@ -3,6 +3,7 @@ import axios from 'axios'
 import BasicTable from "../components/BBTable"
 import AddPost from "../components/AddPostForm"
 import {Button} from 'antd'
+import CT from "../components/CellTest"
 
 export default function PostPage(props) {
 
@@ -16,8 +17,20 @@ export default function PostPage(props) {
         setPostData(res.data)
         let keys = Object.keys(res.data[0])
         var colDef = []
+        /*
         keys.forEach((k) => {
             colDef.push({headerName:k, field:k})
+        })
+        */
+        let first = true
+        keys.forEach((k) => {
+            if (first==true){
+                colDef.push({headerName:k, field:k, cellRenderer: CT})
+            }
+            else{
+                colDef.push({headerName:k, field:k})
+            }
+            first = false
         })
         setColData(colDef)
             

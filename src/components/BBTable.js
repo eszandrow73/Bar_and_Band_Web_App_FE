@@ -6,17 +6,24 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import {Button} from 'antd'
 
 import DisplayRec from "./RecordDisplayForm"
+//import CT from "./CellTest"
 
 export default function DeckTable(props){
     const columnDefs = props.in_cols
+    
+    /*
+    columnDefs.push({field:'test', cellRenderer: CT})
     if (columnDefs[0]!=undefined){
         columnDefs[0].checkboxSelection = true
+        //columnDefs[0].cellRenderer = CT
     }
+    */
 
     columnDefs.forEach((c)=>{
         if(c.field.includes("id")||c.field.includes("Id")){
             c.hide = true
         }
+        
     })
 
     const rowData =  props.in_data ;

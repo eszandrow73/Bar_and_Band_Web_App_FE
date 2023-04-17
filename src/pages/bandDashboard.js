@@ -18,7 +18,7 @@ export default function Dashboard(props) {
         var colDef = []
         var first = true
         keys.forEach((k) => {
-            if (first=true){
+            if (first==true){
                 colDef.push({headerName:k, field:k, cellRenderer: CT})
             }
             else{

@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect} from 'react'
 import BasicTable from "../components/BBTable"
+import CT from "../components/CellTest"
 import axios from "axios"
 
 export default function Dashboard(props) {
@@ -13,8 +14,20 @@ export default function Dashboard(props) {
         setBandData(res.data)
         let keys = Object.keys(res.data[0])
         var colDef = []
+        /*
         keys.forEach((k) => {
             colDef.push({headerName:k, field:k})
+        })
+        */
+       var first = true
+        keys.forEach((k) => {
+            if (first==true){
+                colDef.push({headerName:k, field:k, cellRenderer: CT})
+            }
+            else{
+                colDef.push({headerName:k, field:k})
+            }
+            first = false
         })
         setColData(colDef)
             
