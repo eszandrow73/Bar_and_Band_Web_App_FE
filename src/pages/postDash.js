@@ -72,8 +72,7 @@ export default function PostPage(props) {
             })
             setUrlList(output)
             
-        })
-        */
+        })*/
         setUrlList("/person.png")
     }
 
