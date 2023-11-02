@@ -12,10 +12,33 @@ export default function PostPage(props) {
     const [colData, setColData] = useState([])
 
     const loadData = async() => {
-        let res = await axios.get("http://localhost:8999/getPosts")
+        let res = [
+            {
+              "postText": "first post",
+              "location": "Boston",
+              "postId": 6,
+              "user_id": 1,
+              "img_id": null
+            },
+            {
+              "postText": "second post",
+              "location": "Boston",
+              "postId": 7,
+              "user_id": 1,
+              "img_id": null
+            },
+            {
+              "postText": "image post",
+              "location": "Boston",
+              "postId": 8,
+              "user_id": 1,
+              "img_id": "1673588631255-baleful-mastery.png"
+            }
+          ]
+        //await axios.get("http://localhost:8999/getPosts")
         console.log(res)
-        setPostData(res.data)
-        let keys = Object.keys(res.data[0])
+        setPostData(res)
+        let keys = Object.keys(res[0])
         var colDef = []
         /*
         keys.forEach((k) => {
@@ -37,6 +60,7 @@ export default function PostPage(props) {
     }
 
     const getData = () =>{
+        /*
         axios.get('http://localhost:8999/getImages')
         .then((res)=>{
             //console.log(res.data)
@@ -49,6 +73,8 @@ export default function PostPage(props) {
             setUrlList(output)
             
         })
+        */
+        setUrlList("/person.png")
     }
 
     useEffect(() => {
@@ -59,13 +85,13 @@ export default function PostPage(props) {
     return (
         <div>
             <h2>PostPage</h2>
-            <AddPost in_page='MainPost' /><Button onClick={getData}>View Images</Button>
+            <AddPost in_page='MainPost' />{/*<Button onClick={getData}>View Images</Button>*/}
             <br /><br />
             <BasicTable in_cols={ colData } in_data={postData } curUserId={props.curUserId}/>
             <br /><br />
-            {urlList.map((u)=>(<>
+            {/*urlList.map((u)=>(<>
                 <img alt="no image" style={{'width':'500px','height':'500px' }} src={u} /><br />
-            </>))}
+            </>))*/}
         </div>
     );
 }

@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect} from 'react'
 import BasicTable from "../components/BBTable"
 import CT from "../components/CellTest"
-import axios from "axios"
+//import axios from "axios"
 
 export default function Dashboard(props) {
 
@@ -9,10 +9,21 @@ export default function Dashboard(props) {
     const [colData, setColData] = useState([])
 
     const loadData = async() => {
-        let res = await axios.get("http://localhost:8999/barData")
+        let res = [
+            {
+              "id": 1,
+              "name": "Bar : FireFlys BBQ",
+              "location": "350 E. Main Street,Marlborough, MA 01752",
+              "website": "https://www.fireflysbbq.com/",
+              "food_menu": "https://www.fireflysbbq.com/dine-in-menu",
+              "drink_menu": "https://www.fireflysbbq.com/beverage-menu",
+              "bandPlayedAt": 1
+            }
+          ]
+          //await axios.get("http://localhost:8999/barData")
         console.log(res)
-        setBandData(res.data)
-        let keys = Object.keys(res.data[0])
+        setBandData(res)
+        let keys = Object.keys(res[0])
         var colDef = []
         /*
         keys.forEach((k) => {

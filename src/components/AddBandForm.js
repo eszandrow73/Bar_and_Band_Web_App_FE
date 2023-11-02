@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import { Form, Input, Button, Modal, message } from 'antd';
-import axios from 'axios'
+//import axios from 'axios'
 
 const BandForm = (props) => {
     const [open, setOpen] = useState(false);
@@ -25,6 +25,7 @@ const BandForm = (props) => {
         r_list.push(values.members)
 
         //console.log(r_list)
+        /*
         axios.get('http://localhost:8999/addBand',{params: {'input':r_list}})
         .then((res)=>{
             console.log(res)
@@ -43,7 +44,9 @@ const BandForm = (props) => {
         .finally(()=>{
             changeOpen()
         })
-        
+        */
+       alert("Add Band")
+        changeOpen()
 
     }
 

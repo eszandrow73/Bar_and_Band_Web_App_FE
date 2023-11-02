@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import axios from 'axios'
+//import axios from 'axios'
 import {Button, Card, Input, Form, Typography} from 'antd'
 import { CheckOutlined, HighlightOutlined, SmileFilled, SmileOutlined } from '@ant-design/icons';
 import ImageUploader from '../components/ImageUploader';
@@ -11,16 +11,19 @@ export default function Profile(props) {
     const [profileText, setProfileText] = useState('')
 
     const loadData = async() => {
-        let res = await axios.get("http://localhost:8999/getProfile")
-        console.log(res)
-        setImg('http://localhost:8999/image/' + res.data[0].profileimage)
-        setProfileText(res.data[0].profiletext)    
+        //let res = await axios.get("http://localhost:8999/getProfile")
+        //console.log(res)
+        setImg("/person.png")
+            //'http://localhost:8999/image/' + res.data[0].profileimage)
+        setProfileText("Add Profile Text Here")
+            //res.data[0].profiletext)    
     }
 
     const onFinish=(update)=>{
         var values = {}
         values["profileEditText"] = update
         values["userId"] = 1
+        /*
         console.log(values)
         axios.get("http://localhost:8999/updateProfile", {params: values})
         .then((res)=>{
@@ -33,6 +36,8 @@ export default function Profile(props) {
             //toggleEdit()
             setProfileText(update)
         })
+        */
+        setProfileText(update)
     }
 
     useEffect(() => {
@@ -46,7 +51,7 @@ export default function Profile(props) {
             <Card
             hoverable
             style={{
-              width: '100%',
+              width: '30%',
             }}
             cover={<img src={urlImg} />}
             >

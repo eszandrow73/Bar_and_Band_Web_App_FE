@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
-import axios from 'axios'
+//import axios from 'axios'
 import "./loginform.css"
 
 const LoginForm = (props) => {
@@ -21,17 +21,17 @@ const LoginForm = (props) => {
         const un = values.username
         const pw = values.password
 
-        var resId = await axios.get(`http://localhost:8999/getUser/${un}`)
+        //var resId = await axios.get(`http://localhost:8999/getUser/${un}`)
         //console.log(resId)
-        const id = resId.data[0].account_id
+        //const id = resId.data[0].account_id
 
-        var res = await axios.get(`http://localhost:8999/checkUser/${id}`)
+        //var res = await axios.get(`http://localhost:8999/checkUser/${id}`)
         //console.log(res)
-        let valid_pw = res.data[0].password
+        let valid_pw = 12345///res.data[0].password
 
         if (pw==valid_pw){
             hideModal()
-            props.storeUser(un, id, res.data[0].email)
+            props.storeUser(un, 1, "ericzan73@aol.com")//res.data[0].email)
         }
         else{
             var curCt = ct

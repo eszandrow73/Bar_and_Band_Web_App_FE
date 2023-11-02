@@ -100,7 +100,7 @@ export default function DeckTable(props){
             }}
         >
             {props.in_data[0]!=undefined?(<>
-                <Button type="primary" onClick={onButtonClick}>View Selected Record</Button>
+                {/*<Button type="primary" onClick={onButtonClick}>View Selected Record</Button>*/}
                 <AgGridReact
                     columnDefs={columnDefs}
                     rowData={rowData}

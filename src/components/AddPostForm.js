@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import { Form, Input, Button, Modal, message } from 'antd';
-import axios from 'axios'
+//import axios from 'axios'
 
 const { TextArea } = Input;
 
@@ -11,11 +11,36 @@ const PostForm = (props) => {
 
     const changeOpen = async() => {
         if(open==false){
+            /*
             axios.get('http://localhost:8999/i_test/' + props.in_page)
             .then((res)=>{
                 setDisForm(res.data)
                 setOpen(true)
           })
+          */
+          setDisForm(`
+          <!DOCTYPE html>
+          <html lang="eng">
+      
+          <body>
+              <h1>Upload Image : ${props.in_page}</h1>
+              <form method="POST"  enctype="multipart/form-data">
+                  <input type="file" name="image" onChange="function loadImage(event){
+                      console.log(event)
+                      console.log(event.target.files[0]);
+                      var selectedImage = event.target.files[0];
+                      var elem = document.createElement('img');
+                      elem.src = window.URL.createObjectURL(selectedImage);
+                      document.getElementById('body').appendChild(elem);
+                  }
+                  loadImage(event);">
+                  <div id='body'></div>
+                  <input type="submit">
+              </form>
+          </body>
+          </html>
+          `)
+          setOpen(true)
         }
         else{
             setOpen(false)
@@ -34,6 +59,7 @@ const PostForm = (props) => {
         r_list.push(values.location)
 
         //console.log(r_list)
+        /*
         axios.get('http://localhost:8999/addPost',{params: {'input':r_list}})
         .then((res)=>{
             console.log(res)
@@ -52,7 +78,13 @@ const PostForm = (props) => {
         .finally(()=>{
             changeOpen()
         })
+        */
         
+        messageApi.open({
+            type: 'success',
+            content: 'Post Data Added',
+        });
+        changeOpen()
 
     }
 

@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import { Form, Input, Button, Modal, message } from 'antd';
-import axios from 'axios'
+//import axios from 'axios'
 const { TextArea } = Input;
 
 const EmailForm = (props) => {
@@ -11,14 +11,14 @@ const EmailForm = (props) => {
 
     const changeOpen = async() => {
         if(open==false){
-            let res1 = await axios.get(`http://localhost:8999/checkUser/${props.from}`)
-            let res2 = await axios.get(`http://localhost:8999/checkUser/${props.from}`)//sentTo}`)
+            //let res1 = await axios.get(`http://localhost:8999/checkUser/${props.from}`)
+            //let res2 = await axios.get(`http://localhost:8999/checkUser/${props.from}`)//sentTo}`)
 
-            let from_email = res1.data[0].email
-            setFrom(from_email)
+            //let from_email = res1.data[0].email
+            setFrom("ericzan73@aol.com")//from_email)
 
-            let to_email = res2.data[0].email
-            setSendTo(to_email)
+            //let to_email = res2.data[0].email
+            setSendTo("ericzan73@aol.com")//to_email)
             setOpen(true)
         }
         else{
@@ -42,6 +42,7 @@ const EmailForm = (props) => {
         email_list.push(values.email_text)
 
         //console.log(r_list)
+        /*
         axios.get('http://localhost:8999/sendEmailReal', {params:{input: email_list}})
         //axios.get('http://localhost:8999/sendEmail', {params:{input: email_list}})
         .then((res)=>{
@@ -61,6 +62,13 @@ const EmailForm = (props) => {
         .finally(()=>{
             changeOpen()
         })
+        */
+
+        messageApi.open({
+            type: 'success',
+            content: 'Email Sent',
+        });
+        changeOpen()
         
 
     }

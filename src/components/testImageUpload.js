@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {Button} from 'antd'
-import axios from 'axios'
+//import axios from 'axios'
 
 
 const UploadAndDisplayImage = () => {
@@ -18,6 +18,7 @@ const UploadAndDisplayImage = () => {
           let raw_input = selectedImage
           console.log(selectedImage)
           //raw_input["name"] = 'image'
+          /*
           axios({
             url:'http://localhost:8999/api/image-upload',
             method:"POST",
@@ -27,6 +28,7 @@ const UploadAndDisplayImage = () => {
             console.log(res)
           })
           .catch((err)=>console.log(err))
+          */
         }}>Add to DB</Button>
         </div>
       )}
@@ -48,12 +50,14 @@ const UploadAndDisplayImage = () => {
           let raw_input = selectedImage
           console.log(selectedImage)
           //raw_input["name"] = 'image'
+          /*
           axios.get('http://localhost:8999/i_test')
           .then((res)=>{
             console.log(res)
             setDisForm(res.data)
           })
           .catch((err)=>console.log(err))
+          */
         }}>check output</Button>
       
       </>):("")}
